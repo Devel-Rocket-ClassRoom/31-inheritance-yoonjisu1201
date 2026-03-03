@@ -351,7 +351,7 @@ sealed class FinalClass
         Console.WriteLine("이 클래스는 상속할 수 없습니다.");
     }
 }
-*/
+
 
 //10.
 Child child = new Child();
@@ -374,11 +374,88 @@ class Parent
 
 class Child : Parent
 {
-    public int Value = 20;
+    public new int Value = 20;
 
-    public void Show()
+    public new void Show()
     {
         Console.WriteLine("Child.Show()");
     }
 }
 
+//11.
+Dog dog = new Dog();
+
+Console.WriteLine(dog is Animal);
+Console.WriteLine(dog is Dog);
+Console.WriteLine(dog is Cat);
+
+
+class Animal { }
+class Dog : Animal { }
+class Cat : Animal { }
+*/
+
+//12.
+GameCharacter[] characters = new GameCharacter[]
+{
+    new Warrior("아서", 25),
+    new Mage("멀린", 40),
+    new Warrior("란슬롯", 30)
+};
+
+foreach (GameCharacter character in characters)
+{
+    character.ShowStatus();
+    character.Attack();
+    Console.WriteLine();
+}
+
+abstract class GameCharacter
+{
+    public string Name { get; private set; }
+    public int Health { get; private set; }
+
+    protected GameCharacter(string name, int health)
+    {
+        Name = name; 
+        Health = health; 
+    }
+
+    public abstract void Attack();
+
+    public void ShowStatus()
+    {
+        Console.WriteLine($"[{Name}] 체력: {Health}");
+    }
+}
+
+class Warrior : GameCharacter
+{
+    public int Strength {  get; private set; }
+
+    public Warrior(string name, int strength) : base(name, 150)
+    {
+        Strength = strength; 
+    }
+
+    public override void Attack()
+    {
+        Console.WriteLine($"{Name}이(가) 검으로 {Strength} 데미지를 입힙니다!");
+    }
+}
+
+class Mage : GameCharacter
+{
+    public int MagicPower { get; private set; }
+
+    public Mage(string name, int magicPower) : base(name, 80)
+    {
+        MagicPower = magicPower;
+    }
+
+    public override void Attack()
+    {
+        Console.WriteLine($"{Name}이(가) 마법으로 {MagicPower} 데미지를 입힙니다!");
+    }
+  
+}
