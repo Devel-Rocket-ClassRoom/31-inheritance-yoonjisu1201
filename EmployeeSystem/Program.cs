@@ -10,3 +10,4 @@ Intern intern = new Intern("박인턴");
 manager.PrintInfo();
 developer.PrintInfo();
 intern.PrintInfo();
+
